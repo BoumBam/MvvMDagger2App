@@ -1,6 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
 
+
+    <data>
+        <variable
+            name="recyclerData"
+            type="com.example.daag.model.RecyclerData" />
+    </data>
+
     <LinearLayout
     android:layout_width="wrap_content"
     android:layout_height="wrap_content">
@@ -17,7 +24,8 @@
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
         android:textSize="20sp"
-        android:textColor="@color/black" />
+        android:textColor="@color/black"
+        android:text="@{recyclerData.name}"/>
 
     <TextView
         android:id="@+id/tvDes"
@@ -26,7 +34,8 @@
         android:layout_margin="10dp"
         android:textSize="16sp"
         android:maxLines="2"
-        android:textColor="@color/black" />
+        android:textColor="@color/black"
+        android:text="@{recyclerData.description}"/>
 </LinearLayout>
 
 </layout>

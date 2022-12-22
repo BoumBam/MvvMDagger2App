@@ -10,6 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.daag.databinding.RecyclerViewRowBinding;
 import com.example.daag.model.RecyclerData;
 
 import java.util.List;
@@ -27,18 +28,22 @@ public class RecyclerViewAdapter extends
     @NonNull
     @Override
     public RecyclerViewAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.recycler_view_row, parent, false);
-        return new MyViewHolder(view);
+        LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
+        RecyclerViewRowBinding recyclerViewRowBinding = RecyclerViewRowBinding.inflate(layoutInflater, parent, false);
+        return new MyViewHolder(recyclerViewRowBinding);
     }
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerViewAdapter.MyViewHolder holder, int position) {
-        holder.tvTitle.setText(listData.get(position).getName());
-        holder.tvDesc.setText(listData.get(position).getDescription());
+        /*holder.tvTitle.setText(listData.get(position).getName());
+        holder.tvDesc.setText(listData.get(position).getDescription());*/
 
-        Glide.with(holder.thumbImage)
+        /*Glide.with(holder.thumbImage)
                 .load(listData.get(position).getOwner().getAvatar_url())
-                .into(holder.thumbImage);
+                .into(holder.thumbImage);*/
+
+        holder.recyclerViewRowBinding.setRecyclerData(listData.get(position));
+        holder.recyclerViewRowBinding.executePendingBindings();
     }
 
     @Override
@@ -51,16 +56,12 @@ public class RecyclerViewAdapter extends
 
     class MyViewHolder extends RecyclerView.ViewHolder {
 
-        TextView tvTitle;
-        TextView tvDesc;
-        ImageView thumbImage;
+        RecyclerViewRowBinding recyclerViewRowBinding;
 
-        public MyViewHolder(View view) {
-            super(view);
+        public MyViewHolder(RecyclerViewRowBinding recyclerViewRowBinding) {
+            super(recyclerViewRowBinding.getRoot());
 
-            tvTitle = view.findViewById(R.id.tvTitle);
-            tvDesc = view.findViewById(R.id.tvDes);
-            thumbImage = view.findViewById(R.id.thumbImage);
+            this.recyclerViewRowBinding = recyclerViewRowBinding;
         }
     }
 }
