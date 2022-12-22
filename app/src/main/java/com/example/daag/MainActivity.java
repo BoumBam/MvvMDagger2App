@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.example.daag.databinding.ActivityMainBinding;
 import com.example.daag.model.RecyclerList;
 
 public class MainActivity extends AppCompatActivity {
@@ -17,20 +18,21 @@ public class MainActivity extends AppCompatActivity {
     RecyclerViewAdapter recyclerViewAdapter;
     private MainActivityViewModel viewModel;
 
+    private ActivityMainBinding binding;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
 
-        initRecyclerView();
-        getData();
-    }
+        binding = ActivityMainBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
 
-    private void initRecyclerView() {
-        RecyclerView recyclerView = findViewById(R.id.recyclerView);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        binding.recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerViewAdapter = new RecyclerViewAdapter();
-        recyclerView.setAdapter(recyclerViewAdapter);
+        binding.recyclerView.setAdapter(recyclerViewAdapter);
+
+        getData();
     }
 
     private void getData() {
