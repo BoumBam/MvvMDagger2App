@@ -7,6 +7,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.databinding.BindingAdapter;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -63,5 +64,12 @@ public class RecyclerViewAdapter extends
 
             this.recyclerViewRowBinding = recyclerViewRowBinding;
         }
+    }
+
+    @BindingAdapter("android:loadImage")
+    public static void loadImage(ImageView imageView, String urlImage) {
+        Glide.with(imageView)
+                .load(urlImage)
+                .into(imageView);
     }
 }

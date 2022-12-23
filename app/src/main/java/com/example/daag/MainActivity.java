@@ -17,9 +17,7 @@ public class MainActivity extends AppCompatActivity {
 
     RecyclerViewAdapter recyclerViewAdapter;
     private MainActivityViewModel viewModel;
-
     private ActivityMainBinding binding;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,9 +42,7 @@ public class MainActivity extends AppCompatActivity {
                     Log.d("TAG", "onChanged: " + recyclerList.getItems());
                     recyclerViewAdapter.setListData(recyclerList.getItems());
                     recyclerViewAdapter.notifyDataSetChanged();
-                    Toast.makeText(MainActivity.this, ""+recyclerList.getItems(), Toast.LENGTH_LONG).show();
-
-
+                    //Toast.makeText(MainActivity.this, ""+recyclerList.getItems(), Toast.LENGTH_LONG).show();
                 } else {
                     Toast.makeText(MainActivity.this, "Unable to fetch data", Toast.LENGTH_LONG).show();
                 }

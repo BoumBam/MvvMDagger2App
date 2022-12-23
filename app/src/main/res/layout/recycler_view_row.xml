@@ -16,7 +16,8 @@
         android:id="@+id/thumbImage"
         android:layout_width="80dp"
         android:layout_height="80dp"
-        android:layout_gravity="center" />
+        android:layout_gravity="center"
+        android:loadImage="@{recyclerData.owner.avatar_url}"/>
 
     <TextView
         android:id="@+id/tvTitle"
