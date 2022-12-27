@@ -56,14 +56,12 @@ public class MainActivityViewModel extends AndroidViewModel {
                      liveDataList.postValue(null);
                  }
             }
-            @Override
+            @Overrideu
             public void onFailure(Call<RecyclerList> call, Throwable t) {
                 liveDataList.postValue(null);
             }
         });
       */
-
-
 
        /* compositeDisposable.add(mService.getDataFromAPI("network")
                 .subscribeOn(Schedulers.io())
