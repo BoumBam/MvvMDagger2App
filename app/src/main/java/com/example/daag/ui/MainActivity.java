@@ -1,15 +1,19 @@
-package com.example.daag;
+package com.example.daag.ui;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.Button;
 import android.widget.Toast;
 
+import com.example.daag.MainActivityViewModel;
+import com.example.daag.R;
+import com.example.daag.adapter.RecyclerViewAdapter;
 import com.example.daag.databinding.ActivityMainBinding;
 import com.example.daag.model.RecyclerList;
 
@@ -30,6 +34,15 @@ public class MainActivity extends AppCompatActivity {
         recyclerViewAdapter = new RecyclerViewAdapter();
         binding.recyclerView.setAdapter(recyclerViewAdapter);
 
+        Button button = findViewById(R.id.button);
+
+        button.setOnClickListener(l -> {
+            Intent intent = new Intent(getApplicationContext(), MainActivity2.class);
+            intent.putExtra("name", "no name to show");
+            intent.putExtra("description", "no description to show");
+            startActivity(intent);
+        });
+
         getData();
     }
 
@@ -40,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
             public void onChanged(RecyclerList recyclerList) {
                 if(recyclerList != null) {
                     Log.d("TAG", "onChanged: " + recyclerList.getItems());
-                    recyclerViewAdapter.setListData(recyclerList.getItems());
+                    recyclerViewAdapter.setListData(recyclerList.getItems(), getApplicationContext());
                     recyclerViewAdapter.notifyDataSetChanged();
                     //Toast.makeText(MainActivity.this, ""+recyclerList.getItems(), Toast.LENGTH_LONG).show();
                 } else {

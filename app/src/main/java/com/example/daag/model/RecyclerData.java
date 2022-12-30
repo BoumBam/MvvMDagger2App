@@ -35,5 +35,4 @@ public class RecyclerData {
     public Owner getOwner() {
         return owner;
     }
-
 }

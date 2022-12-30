@@ -1,7 +1,9 @@
-package com.example.daag;
+package com.example.daag.adapter;
 
+import android.content.Context;
+import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -13,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.daag.databinding.RecyclerViewRowBinding;
 import com.example.daag.model.RecyclerData;
+import com.example.daag.ui.MainActivity2;
 
 import java.util.List;
 
@@ -21,9 +24,11 @@ public class RecyclerViewAdapter extends
 
 
     private List<RecyclerData> listData;
+    public Context context;
 
-    public void setListData(List<RecyclerData> listData) {
+    public void setListData(List<RecyclerData> listData, Context context) {
         this.listData = listData;
+        this.context = context;
     }
 
     @NonNull
@@ -42,6 +47,15 @@ public class RecyclerViewAdapter extends
         /*Glide.with(holder.thumbImage)
                 .load(listData.get(position).getOwner().getAvatar_url())
                 .into(holder.thumbImage);*/
+
+        /*holder.recyclerViewRowBinding.tvTitle.setOnClickListener(l -> {
+            Intent myIntent = new Intent(context, MainActivity2.class);
+            myIntent.putExtra("name", "lamine"); //Optional parameters
+            myIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            context.startActivity(myIntent);
+
+            Log.d("TAG", "handleOnclick: cliked");
+        }); */
 
         holder.recyclerViewRowBinding.setRecyclerData(listData.get(position));
         holder.recyclerViewRowBinding.executePendingBindings();
@@ -66,10 +80,25 @@ public class RecyclerViewAdapter extends
         }
     }
 
+
     @BindingAdapter("android:loadImage")
     public static void loadImage(ImageView imageView, String urlImage) {
         Glide.with(imageView)
                 .load(urlImage)
                 .into(imageView);
+    }
+
+    @BindingAdapter("android:loadClick")
+    public static void loadClick(TextView textView, String name) {
+
+        textView.setOnClickListener(l -> {
+            Intent myIntent = new Intent(textView.getContext(), MainActivity2.class);
+            myIntent.putExtra("name", name); //Optional parameters
+            myIntent.putExtra("description", "description");
+            myIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            textView.getContext().startActivity(myIntent);
+        });
+
+        Log.d("TAG", "handleOnclick: cliked");
     }
 }
